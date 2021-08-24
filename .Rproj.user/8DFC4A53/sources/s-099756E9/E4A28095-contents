@@ -1,0 +1,12 @@
+# R básico.
+
+saldo <- 20
+
+primeiro_nome <- 'Renato'
+sobrenome <- "Lewkowicz"
+
+condicao <- TRUE
+condicao_contraria <- FALSE
+
+condicao2 <- T
+condicao3 <- F
