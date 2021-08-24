@@ -2,7 +2,7 @@ temperatura <- c(22, 35, 44, 30)
 temperatura2 <- c(22, 35, 44, 30, 28, 18, NA, 15, 35)
 
 
-# Função que retorna posição dos valores pares.
+# Function that returns even numbers on an array.
 
 position_even <- function(array) {
   even_number <- array %% 2 == 0
@@ -13,7 +13,7 @@ position_even <- function(array) {
 
 position_even(temperatura)
 
-# Função para substituir valores vazios pela média dos demais valores.
+# Function that replaces empty positions in an array with the mean of the other valid values.
 
 replace_empty <- function(array) {
   empty_position <- which(is.na(array))
