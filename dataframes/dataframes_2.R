@@ -1,6 +1,7 @@
 setwd("~/Aulas/Projetos/LearningR/dataframes")
 
 library(Amelia)
+library(openxlsx)
 
 # Dataframes 2
 
@@ -27,3 +28,7 @@ hist(df$Tarifa)
 posicao_tarifa <- (which(is.na(df$Tarifa)))
 
 df$Tarifa[posicao_tarifa] <- median(df$Tarifa, na.rm = T)
+
+save(df, file = 'df_tratado.RData')
+write.csv(df, file = 'df_tratado.csv')
+write.xlsx(df, file = 'df_tratado.xlsx')
