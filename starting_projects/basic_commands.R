@@ -43,7 +43,7 @@ summary(data)
 is.na(data$satisfacao)
 head(is.na(data$satisfacao))
 which(is.na(data$satisfacao))
-data$satisfacao[2] <- 0.8
+data$satisfacao[2] <- 0.62
 head(data)
 colnames(data) == "comercial"
 which(colnames(data) == "comercial")
@@ -52,5 +52,5 @@ str(data)
 
 #Salvando os dados
 save(data, file = "saved_dt.RData")
-
+write.csv(data, 'saved_data.csv')
 
