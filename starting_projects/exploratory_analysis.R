@@ -23,10 +23,22 @@ Mcor <- cor(df_num)
 corrplot(Mcor, method = "color", type = "lower", tl.col = "black", tl.srt = 45,
          addCoef.col = "black", tl.cex = 0.7, number.cex = 0.7, col = cores(50))
 
-#Atribuindo nomes
+#Atribuindo nomes aos fatores
 data$acidente_trabalho <- factor(data$acidente_trabalho, levels = c(0,1),
                                  labels = c("Não teve acidente","Teve acidente"))
+
+data <- data %>% 
+  mutate(saiu = factor(saiu,
+                       levels = c(0,1),
+                       labels = c("Ativo", "Saiu")), 
+         promocao_ultimos_5_anos = factor(promocao_ultimos_5_anos,
+                                          levels = c(0,1),
+                                          labels = c('Nao teve promocao', 'Teve promocao')))
+
+# Função acima e duas abaixo cumprem o mesmo papel.
+
 data$saiu <- factor(data$saiu, levels = c(0,1), labels = c("Ativo","Saiu"))
+
 data$promocao_ultimos_5_anos <- factor(data$promocao_ultimos_5_anos, levels = c(0,1),
                                        labels = c("Não teve promoção","Teve promoção"))
 
