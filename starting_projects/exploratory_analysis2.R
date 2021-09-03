@@ -2,13 +2,17 @@
 setwd("~/Aulas/Projetos/LearningR/starting_projects")
 rm(list=ls())
 library(ggplot2)
+library(tidyverse)
 
 # Dados
 load("saved_dt1.RData")
 
+cores_cat <- c('gray70', '#5288db')
+
 # Criando um gráfico de dispersão
-ggplot(data=data, aes(x=satisfacao, y=ultima_avaliacao)) +
-  geom_point(aes(colour=saiu), alpha=0.5, size=2) +
+ggplot(data, aes(x=satisfacao, y=ultima_avaliacao)) +
+  geom_point(aes(colour=saiu), alpha=0.5, size=2) + 
+  scale_color_manual(values = cores_cat) + 
   labs(colour="Saiu", x="Satisfação", y= "Avaliação",
        title="Status de colaboradores em função da avalição e satisfação") +
   theme_light()
@@ -16,12 +20,14 @@ ggplot(data=data, aes(x=satisfacao, y=ultima_avaliacao)) +
 # Facetando por salário e número de projetos
 ggplot(data, aes(satisfacao, ultima_avaliacao)) +
   geom_point(aes(fill=saiu, colour=saiu), alpha=.5) +
+  scale_color_manual(values = cores_cat) + 
   facet_grid(salario ~ volume_projetos, labeller = label_both) +
   theme_light() + labs(x = "Satisfação", y = "Última avaliação")
 
 # Facetando por número de projetos e tempo de cia
 ggplot(data) + geom_point(aes(satisfacao, ultima_avaliacao, fill=saiu,
                               colour=saiu), alpha=.5, position = "identity") +
+  scale_color_manual(values = cores_cat) + 
   facet_grid(tempo_cia ~ volume_projetos, labeller = label_both) +
   theme_light() +
   labs(x = "Satisfação", y = "Última avaliação")
