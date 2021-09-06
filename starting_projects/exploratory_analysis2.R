@@ -108,10 +108,11 @@ ggplot(dx3) + geom_boxplot(aes(y = value, x = var, fill=saiu,
 #Criando um gráfico ridgeline
 data_ridge <- dx3 %>% mutate(ridge = paste(saiu, var, sep = " - "))
 library(ggridges)
-ggplot(data_ridge, aes(x = value, y = ridge, alpha = 0.5, fill=saiu, colour = saiu)) +
+dr <- ggplot(data_ridge, aes(x = value, y = ridge, alpha = 0.5, fill=saiu, colour = saiu)) +
   geom_density_ridges() +
   theme_ridges() +
   theme(legend.position = "none") +
   facet_grid(tempo_cia ~ volume_projetos, labeller = label_both)
 
+cvdPlot(dr)
 
