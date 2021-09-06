@@ -3,11 +3,13 @@ setwd("~/Aulas/Projetos/LearningR/starting_projects")
 rm(list=ls())
 library(ggplot2)
 library(tidyverse)
+library(colorBlindness)
 
 # Dados
 load("saved_dt1.RData")
 
 cores_cat <- c('gray70', '#5288db')
+cores <- colorRampPalette(c('#4d4d4d', 'white', '#5288db'))
 
 # Criando um gráfico de dispersão
 ggplot(data, aes(x=satisfacao, y=ultima_avaliacao)) +
@@ -32,20 +34,30 @@ ggplot(data) + geom_point(aes(satisfacao, ultima_avaliacao, fill=saiu,
   theme_light() +
   labs(x = "Satisfação", y = "Última avaliação")
 
+# Explorando outras possibilidades
+
+ggplot(data) + geom_point(aes(satisfacao, ultima_avaliacao, fill=saiu,
+                              colour=saiu), alpha=.5, position = "identity", size = 3) +
+  scale_color_manual(values = cores_cat) + 
+  facet_grid(. ~ volume_projetos, labeller = label_both) +
+  theme_light() +
+  labs(x = "Satisfação", y = "Última avaliação")
+
 # Gráfico de densidade de probabilidade
 data_dens <- data[data$saiu == "Saiu",]
-ggplot(data_dens, aes(x=satisfacao, y=ultima_avaliacao)) +
+hm <- ggplot(data_dens, aes(x=satisfacao, y=ultima_avaliacao)) +
   stat_density2d(geom = "raster", aes(fill = ..density..), contour = FALSE) +
-  scale_fill_distiller(palette = "RdYlBu") +
+  # scale_fill_distiller(palette = "RdYlBu") + 
+  scale_fill_gradientn(colours = cores(100)) + 
   labs(fill="Dens. de prob. de saída",
        x="Satisfação",
        y= "Avaliação",
        title="Status de colaboradores em função da avaliação e satisfação") +
   theme_light()
 
+# Checando se o gráfico é amigável para o público dautônico
+cvdPlot(hm)
 
-# A partir desse ponto, é um conteúdo extra, apresentado de forma didática
-# no pdf, para tornar suas análises mais robustas
 # Transformando os dados para um gráfico de barras
 library(dplyr)
 dt1 <- data
