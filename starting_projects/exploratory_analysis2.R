@@ -114,5 +114,6 @@ dr <- ggplot(data_ridge, aes(x = value, y = ridge, alpha = 0.5, fill=saiu, colou
   theme(legend.position = "none") +
   facet_grid(tempo_cia ~ volume_projetos, labeller = label_both)
 
+#Testando acessibilidade para daltonicos e deficientes visuais
 cvdPlot(dr)
 
