@@ -5,7 +5,23 @@ load("saved_dt.RData")
 
 #Bibliotecas
 library(rpart)
+library(rpart.plot)
 library(caret)
+library(tidyverse)
+
+#Unindo bases de dados - apenas um exemplo não relacionado a machine learning para referências futuras
+df_ag <- read.csv('avaliacao_desempenho.csv')
+df_ag <- df_ag[,-1] #Apagando primeira coluna
+
+df_comeco <- df_ag %>% 
+  select(ID:hora_extra)
+
+df_fim <- df_ag %>% 
+  select(ID, idade:ninebox)
+
+df_unido <- left_join(df_comeco, df_fim, by = c('ID' = 'ID'))
+df_unido_alt <- df_comeco %>%
+  left_join(df_fim, by = c('ID' = 'ID'))
 
 #Treinamento e teste
 smpsize <- floor(0.75*nrow(data))
