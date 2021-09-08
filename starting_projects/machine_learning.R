@@ -13,7 +13,7 @@ library(ggplot2)
 
 #Unindo bases de dados - apenas um exemplo não relacionado a machine learning para referências futuras
 df_ag <- read.csv('avaliacao_desempenho.csv')
-df_ag <- df_ag[,-1] #Apagando primeira coluna
+df_ag <- df_ag[,-1] #Apagando primeira coluna (índice sem valor semântico)
 
 df_comeco <- df_ag %>% 
   select(ID:hora_extra)
